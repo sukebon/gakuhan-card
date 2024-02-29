@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import SessionProvider from "@/providers/session-provider";
+import NextUiProviders from "@/providers/nextui-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <SessionProvider>
+      <html lang="en">
+        <body className="w-full">
+          <NextUiProviders>
+            {children}
+          </NextUiProviders>
+        </body>
+      </html>
+    </SessionProvider >
   );
 }
